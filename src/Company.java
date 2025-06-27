@@ -24,7 +24,7 @@ public class Company {
     }
 
     public void SetTaxSystem(int taxSystem) {
-        if (taxSystem > 0 || taxSystem < 3) {
+        if (taxSystem > 0 && taxSystem < 3) {
             this.taxSystem = taxSystem;
         }
     }
