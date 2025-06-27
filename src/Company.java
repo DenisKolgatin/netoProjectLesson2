@@ -24,7 +24,9 @@ public class Company {
     }
 
     public void SetTaxSystem(int taxSystem) {
-        this.taxSystem = taxSystem;
+        if (taxSystem > 0 || taxSystem < 3) {
+            this.taxSystem = taxSystem;
+        }
     }
 
     public void payTaxes() {
@@ -39,9 +41,15 @@ public class Company {
                 tax = taxAmount2.calcTaxFor(this.debit, this.credit);
                 break;
         }
-        System.out.println("Компания "+ this.title + " уплатила налог в размере: " + tax + " руб.");
-        this.debit = 0;
-        this.credit = 0;
+        if (tax != 0) {
+            System.out.println("Компания "+ this.title + " уплатила налог в размере: " + tax + " руб.");
+            this.debit = 0;
+            this.credit = 0;
+        } else {
+            System.out.println("Введите правильное значение системы налогообложения");
+        }
+
 
     }
+
 }
