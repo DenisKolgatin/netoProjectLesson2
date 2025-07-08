@@ -7,13 +7,11 @@ public class Company {
     public int debit;
     public int credit;
     public int taxSystem;
-   /*
-    public Company(String title, int debit, int credit, int taxSystem) {
+
+    public Company(String title, int taxSystem) {
         this.title = title;
-        this.debit = debit;
-        this.credit = credit;
         this.taxSystem = taxSystem;
-    } */
+    }
 
     public void shiftMoney(int amount) {
         if (amount > 0) {
@@ -33,12 +31,12 @@ public class Company {
         int tax = 0;
         switch (taxSystem) {
             case 1:
-                TaxSystem taxAmount1 = new USNdebit();
-                tax = taxAmount1.calcTaxFor(this.debit, this.credit);
+                TaxSystem debit = new USNdebit();
+                tax = debit.calcTaxFor(this.debit, this.credit);
                 break;
             case 2:
-                TaxSystem taxAmount2 = new USNdebitcredit();
-                tax = taxAmount2.calcTaxFor(this.debit, this.credit);
+                TaxSystem debitcredit = new USNdebitcredit();
+                tax = debitcredit.calcTaxFor(this.debit, this.credit);
                 break;
         }
         if (tax != 0) {

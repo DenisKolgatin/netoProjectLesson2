@@ -9,15 +9,17 @@ public class Main {
         int menu = 0; //Управление меню
         int taxPredSumm = 0; //Предварительный рассчет налога
         Scanner sc = new Scanner(System.in);
-        Company company = new Company();
         System.out.println("Введите название компании ");
-        company.title = sc.nextLine();
+        String title = sc.nextLine().toString();
+
+        Company company = new Company(title,0);
         company.debit = 0;
         company.credit = 0;
 
         while (true) {
             System.out.println("Введите 1 для добавления платежа, 2 для выбора налогообложения");
             menu = sc.nextInt();
+
             switch (menu) {
                 case 1:
                     System.out.println("Введите доход или расход (со знаком минус)");
