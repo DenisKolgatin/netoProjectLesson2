@@ -8,11 +8,13 @@ public class Main {
     public static void main(String[] args) {
         int menu = 0; //Управление меню
         int taxPredSumm = 0; //Предварительный рассчет налога
+        int TaxVarian = 0;
         Scanner sc = new Scanner(System.in);
         System.out.println("Введите название компании ");
         String title = sc.nextLine().toString();
 
-        Company company = new Company(title,0);
+
+        Company company = new Company(title,new USNdebit());
         company.debit = 0;
         company.credit = 0;
 
@@ -33,7 +35,13 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Введите 1 для УСН дохода, введите 2 для УСН доходы-расходы");
-                    company.SetTaxSystem(sc.nextInt());
+                    TaxVarian = sc.nextInt();
+                    if (TaxVarian == 1) {
+                        company.SetTaxSystem(new USNdebit());
+                    } else {
+                        company.SetTaxSystem(new USNdebitcredit());
+                    }
+
                     company.payTaxes();
                     break;
                 default:

@@ -6,9 +6,9 @@ public class Company {
     public String title;
     public int debit;
     public int credit;
-    public int taxSystem;
+    public TaxSystem taxSystem;
 
-    public Company(String title, int taxSystem) {
+    public Company(String title, TaxSystem taxSystem) {
         this.title = title;
         this.taxSystem = taxSystem;
     }
@@ -21,32 +21,15 @@ public class Company {
         }
     }
 
-    public void SetTaxSystem(int taxSystem) {
-        if (taxSystem > 0 && taxSystem < 3) {
-            this.taxSystem = taxSystem;
-        }
+    public void SetTaxSystem(TaxSystem taxSystem) {
+        this.taxSystem = taxSystem;
     }
 
     public void payTaxes() {
-        int tax = 0;
-        switch (taxSystem) {
-            case 1:
-                TaxSystem debit = new USNdebit();
-                tax = debit.calcTaxFor(this.debit, this.credit);
-                break;
-            case 2:
-                TaxSystem debitcredit = new USNdebitcredit();
-                tax = debitcredit.calcTaxFor(this.debit, this.credit);
-                break;
-        }
-        if (tax != 0) {
-            System.out.println("Компания "+ this.title + " уплатила налог в размере: " + tax + " руб.");
-            this.debit = 0;
-            this.credit = 0;
-        } else {
-            System.out.println("Введите правильное значение системы налогообложения");
-        }
-
+        int tax = taxSystem.calcTaxFor(debit, credit);
+        System.out.println("Компания "+ this.title + " уплатила налог в размере: " + tax + " руб.");
+        this.debit = 0;
+        this.credit = 0;
 
     }
 
